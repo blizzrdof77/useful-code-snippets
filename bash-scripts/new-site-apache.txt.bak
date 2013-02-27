@@ -1,0 +1,10 @@
+##################################################################### 
+# Launch cygwin in background and python server with windows command
+#####################################################################
+C:\cygwin\bin\mintty.exe C:\cygwin\bin\bash.exe --login -i -c "cd C:/xampp/htdocs/projects/personal/funnypranks; mkvirtualenv --no-site-packages funnypranks; cd ~/; C:/xampp/htdocs/projects/personal/funnypranks/manage.py runserver &> output & disown;exit;exit
+
+
+########################################
+# Hide all of a specific file extension
+########################################
+attrib /d /s +h *.git

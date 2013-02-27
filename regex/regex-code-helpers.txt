@@ -1,0 +1,7 @@
+##################################################################### 
+# NOTEPAD ++ REGULAR EXPRESSION TO CLEAN UP WHITESPACE
+#####################################################################
+ - CTRL + J
+ - Find and Replace in Selection:
+      FIND:  "( *?)([<])"
+      REPLACE: " \2"
