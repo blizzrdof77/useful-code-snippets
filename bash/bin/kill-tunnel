@@ -1,0 +1,3 @@
+#!/bin/sh
+# be VERY careful with parameter $1
+kill -9 $(ps -aW | grep -i ssh | awk '{ print $4 }')
