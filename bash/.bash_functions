@@ -6,6 +6,27 @@
 # GitHub Repo:
 # https://github.com/blizzrdof77/useful-code-snippets.git
 
+## ------------------------- ##
+ #           SUDO            #
+ #   ignore sudo in cygwin   #
+## ------------------------- ##
+sudo() {
+  if [ -z "$1" ]; then
+    echo "sudo what, bitch?"
+  else
+    if [ "$1" = "-i" ]; then
+      echo "windows blows, but we can pretend."
+      timeout3 -t 1 -i 1 -d 1 echo "."
+      timeout3 -t 1 -i 1 -d 1 echo ".."
+      timeout3 -t 1 -i 1 -d 1 echo "..."
+      echo "okay. now you're running commands as root (sudo)"
+    else
+      CMD=${*}
+      $CMD
+    fi
+  fi
+}
+
 ##--------------------------- ##
 ##       START-TUNNEL         ##
  #  initialize an ssh tunnel  #
@@ -69,4 +90,20 @@ function swap()
     mv "$1" $TMPFILE
     mv "$2" "$1"
     mv $TMPFILE "$2"
+}
+
+##------------------------------------ ##
+ #           GITORIOUS-INIT            #
+ # initialize git repo with gitorioius #
+ #          $1 = git repo URL          #
+##------------------------------------ ##
+gitorious-init() { 
+  REPO=$1
+  
+  git init
+  git remote add origin "$REPO"
+  git add .
+  git add -u
+  git commit -m "initialize git repo"
+  git push origin master  
 }
