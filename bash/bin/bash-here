@@ -1,0 +1,3 @@
+#!/bin/sh
+# be VERY careful with parameter $1
+-i /Cygwin-Terminal.ico /usr/bin/bash.exe -c '/bin/xhere /bin/bash'
