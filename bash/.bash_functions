@@ -6,8 +6,77 @@
 # GitHub Repo:
 # https://github.com/blizzrdof77/useful-code-snippets.git
 
+
+
+## --------------------- ##
+ #    -- scandir --      #
+## --------------------- ##
+scandir() {
+  i=0
+  while read line
+  do
+      array[ $i ]="$line"        
+      (( i++ ))
+      echo "${array[1]}"
+  done < <(ls -ls)
+}
+
+## ------------------------------------------------ ##
+ #                   -- su --                       #
+ #                                                  #
+ #   since there are no 'real' users in  winders,   #
+ # this initiates a remote ssh connection.  with no # 
+ # arguments, it connects to the most commonly used #
+ # server (the 1st if condition). each 'elif' entry #
+ #       is for a different server/location         #
+ #                                                  #
+ #         EXAMPLE USAGE: su -s1                    #
+## ------------------------------------------------ ##
+su() {
+  PORT=22
+  if [ -z "$1" ]; then
+    HOST="staging-u01.fahlgrendigital.com"
+    USER="bwagner"
+    PORT="22"
+  elif [ "$1" = "-s1" ]; then
+    USER="bwagner"
+    HOST="staging-u01.fahlgrendigital.com"
+    PORT="22"
+  elif [ "$1" = "-s2" ]; then
+    USER="bwagner"
+    HOST="lnxdev.fahlgrengrip.com"
+    PORT="21904"
+  else
+  # declare -a arr=("element1" element2 element3)
+
+  # ## now loop through the above array
+  # for i in ${arr[@]}
+  # do
+  #    echo $i # or do whatever with individual element of the array
+  # done
+    USER=$1
+    HOST="staging-u01.fahlgrendigital.com"
+  fi
+
+  if [ -z "$2" ]; then
+    HOST="staging-u01.fahlgrendigital.com"
+  else
+    if [ "$2" = "-h" ]; then
+      HOST=$3
+    elif [ "$2" = "-p" ]; then
+      PORT=$3
+    else
+      PORT=$2
+    fi
+  fi
+    
+  CMD="ssh $USER@$HOST -p$PORT"
+  echo $CMD
+  $CMD 
+}
+
 ## ------------------------- ##
- #           SUDO            #
+ #        -- sudo --         #
  #   ignore sudo in cygwin   #
 ## ------------------------- ##
 sudo() {
@@ -28,7 +97,7 @@ sudo() {
 }
 
 ##--------------------------- ##
-##       START-TUNNEL         ##
+ #     -- start-tunnel --     #
  #  initialize an ssh tunnel  #
  #          $1 = host         #
  #          $2 = port         #
@@ -47,7 +116,7 @@ start-tunnel() {
   else
     if [ "$2" = "-w" ]; then
       PORT=1433
-    elif [ "$2" = "-a" ]; then
+    elif [ "$2" = "-l" ]; then
       PORT=3306
     elif [ "$2" = "-p" ]; then
       PORT=$3
@@ -62,7 +131,7 @@ start-tunnel() {
 }
 
 ## ------------------------------ ##
-##             FINDIT             ##
+ #          -- findit --          #
  #  find file w/ pattern in name  #
  #          $1 = search string    #
 ##------------------------------- ##
@@ -75,7 +144,7 @@ start-tunnel() {
 # }
 
 ## ---------------------------- ##
-##             SWAP             ##
+ #          -- swap --          #
  #         swap filenames       #
  #         $1 = filename 1      #
  #         $2 = filename 2      #
@@ -93,7 +162,7 @@ function swap()
 }
 
 ##------------------------------------ ##
- #           GITORIOUS-INIT            #
+ #        -- gitorious-init --         #
  # initialize git repo with gitorioius #
  #          $1 = git repo URL          #
 ##------------------------------------ ##

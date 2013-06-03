@@ -12,7 +12,16 @@ function checkboxToggleViewStage(checkboxId, tableId)  {
 
 function setFundraising() { 
   document.getElementById('m_c_h_Header_lblUserInfo').selectedIndex = 2;
+}
 
+function selectAllFacebookFriends() {
+  var x=document.getElementsByTagName("input");
+  for(var i=0;i<x.length;i++) {
+    if (x[i].type == 'checkbox') {
+      x[i].click();
+    }
+  }; 
+  alert('Done, all your friends have been selected');
 }
 
 "<style> #id-1054713020 {display:block!important;} </style> <script type=\"text/javascript\"> function setFundraising() { document.getElementById('m_c_f_f_CategoryAgeGroup_dropDownList').selectedIndex = 2; } window.onload = function () {document.getElementById('m_c_f_f_CategoryAgeGroup_dropDownList').selectedIndex = 2; } </script>"
