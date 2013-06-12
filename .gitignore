@@ -4,6 +4,7 @@
 
 # Windows image file caches
 Thumbs.db
+ignore/
 
 # Folder config file
 Desktop.ini

@@ -35,16 +35,16 @@ scandir() {
 su() {
   PORT=22
   if [ -z "$1" ]; then
-    HOST="staging-u01.fahlgrendigital.com"
-    USER="bwagner"
+    HOST="remotehost"
+    USER="user"
     PORT="22"
   elif [ "$1" = "-s1" ]; then
-    USER="bwagner"
-    HOST="staging-u01.fahlgrendigital.com"
+    USER="user"
+    HOST="remotehost"
     PORT="22"
   elif [ "$1" = "-s2" ]; then
-    USER="bwagner"
-    HOST="lnxdev.fahlgrengrip.com"
+    USER="user"
+    HOST="remotehost-secondary"
     PORT="21904"
   else
   # declare -a arr=("element1" element2 element3)
@@ -55,11 +55,11 @@ su() {
   #    echo $i # or do whatever with individual element of the array
   # done
     USER=$1
-    HOST="staging-u01.fahlgrendigital.com"
+    HOST="remotehost"
   fi
 
   if [ -z "$2" ]; then
-    HOST="staging-u01.fahlgrendigital.com"
+    HOST="remotehost"
   else
     if [ "$2" = "-h" ]; then
       HOST=$3
