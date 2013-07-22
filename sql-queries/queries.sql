@@ -1,4 +1,12 @@
 QUERIES:
+/* Franklin Park Promos */
+SELECT 0 as PromoID, 'Select a Promo' as PromoName
+UNION ALL
+SELECT PromoID, PromoName FROM FPC_Promo
+UNION ALL
+SELECT EventID + 10000 as PromoID, PromoName + '(Featured Event)' From FPC_EventOther WHERE Featured != 'FALSE'
+UNION ALL
+SELECT SupportItemID + 20000 as PromoID, PromoName + '(Featured Class)' From FPC_Class WHERE Featured != 'FALSE'
 
 /* INSERT INTO */
 INSERT INTO cbustoolkit_staging.Images (ImageId,ImageName,LicenseTypeId,ContactId,ImageCopyright,MediaTypeId,EmbedCode,VideoUrl,Description,FileName,ImagePosition,Hidden)
@@ -11,6 +19,6 @@ INSERT INTO cbustoolkit_staging.Images (ImageId,ImageName,LicenseTypeId,ContactI
   ;
 
 
-
-
   SELECT NodeOwner as UserID, FirstName + ' ' + LastName FROM View_CMS_Tree_Joined, CMS_User WHERE (UserID = {% CMSContext.CurrentDocument.NodeLevel %})
+
+  SELECT DocumentID, DocumentNamePath FROM CMS_Document WHERE ( (DocumentNamePath LIKE '%Application/%') AND (DocumentNamePath NOT LIKE '%Application/%/%'))
