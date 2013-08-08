@@ -15,15 +15,12 @@
 #classify files in colour
 #alias dir='ls --color=auto --format=vertical'
 
-# edit .bashrc and return to directory
-alias bash-config='cd ~/;npp .bashrc;cd -'
-
 
 # ------------------------------- ## 
 #    CUSTOMIZE COMMAND DEFAULTS    #
-
 alias ls='/bin/ls -Fal --color=tty --show-control-chars'
 alias apt-get='apt-cyg'
+alias grep='grep --color'
 
 # ------------------------- ## 
 #    TEXT EDITOR COMMANDS    #
@@ -34,7 +31,6 @@ alias sublime-text='C:/Program\ Files/Sublime\ Text\ 2/sublime_text.exe'
 alias notepad='C:/Program\ Files/Sublime\ Text\ 2/sublime_text.exe'
 alias edit='C:/Program\ Files/Sublime\ Text\ 2/sublime_text.exe'
 alias e='C:/Program\ Files/Sublime\ Text\ 2/sublime_text.exe'
-
 
 # ------------------------- ## 
 #        SSH TUNNELS         #
@@ -51,7 +47,15 @@ alias cd-site1='cd /path/to/projects/site1'
 alias cd-site2='cd /path/to/projects/site2'
 
 
-# ---------------------- ## 
-#      MISCELLANEOUS      #
-alias hide-files='attrib /d /s +h'  # ...specify filename/extension
-alias grep='grep --color'
+
+# ------------------------ ## 
+#      MISCELLANEOUS       #
+alias hide-files='attrib /d /s +h'  # ...specify filename/extension to hide all files with that extension
+alias bash-config='cd ~/;npp .bashrc;cd -' # ...edit .bashrc and return to directory
+alias bash-reset=". ~/.bashrc"  # ...execute .bashrc file after updating it
+alias list-processes="ps -aW"
+alias lsp="ps -aW"
+
+# ----------------------------------- ## 
+#   CUSTOM SCRIPT/EXECUTABLE ALIASES   #
+alias my-executable="/home/user/bin/my_executable.exe"
