@@ -51,7 +51,9 @@ alias cd-site2='cd /path/to/projects/site2'
 # ------------------------ ## 
 #      MISCELLANEOUS       #
 alias hide-files='attrib /d /s +h'  # ...specify filename/extension to hide all files with that extension
-alias bash-config='cd ~/;npp .bashrc;cd -' # ...edit .bashrc and return to directory
+alias bash-config='cd ~/;edit .bashrc;cd -' # ...edit .bashrc and return to directory
+alias bash-aliases='cd ~/;edit .bash_aliases;cd -' # ...edit .bash_aliases and return to directory
+alias bash-functions='cd ~/;edit .bash_functions;cd -' # ...edit .bash_functions and return to directory
 alias bash-reset=". ~/.bashrc"  # ...execute .bashrc file after updating it
 alias list-processes="ps -aW"
 alias lsp="ps -aW"

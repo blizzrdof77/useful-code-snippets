@@ -14,10 +14,10 @@
 function getImgAltTags() {
   var alts = "";
   $("img").each ( 
-    function() { 
-      alts += "  |  " + $(this).attr("alt"); 
-    }
-  );
+                 function() { 
+                  alts += "  |  " + $(this).attr("alt"); 
+                }
+                );
   console.log(alts);
   alert(alts);
 }
@@ -63,17 +63,17 @@ $(document).ready( function() {
 // Add attributes to different types of links to control behavior
 function adjustElementAttributes() {
   if ($(".list").length) {
-     $(".product:first-child").addClass("first");
-  }
-  $("#nav-primary > ul").addClass("nav");
-  $("#nav-primary > ul > li").each( function() {
-    $('<a class="mobile_expand" href="javascript:void(0);">+</a>').prependTo($(this));
-  });
+   $(".product:first-child").addClass("first");
+ }
+ $("#nav-primary > ul").addClass("nav");
+ $("#nav-primary > ul > li").each( function() {
+  $('<a class="mobile_expand" href="javascript:void(0);">+</a>').prependTo($(this));
+});
 } 
 
 // Slick scroll animation to top of document
 function scrollToTop() {
-$( 'html, body' ).animate( { 
+  $( 'html, body' ).animate( { 
     scrollTop: $( "html" ).offset().top
   }, 425 );
 }
@@ -114,13 +114,23 @@ function hideElement(elementSelector) {
 
 function onlyShowFirstLine() {
   $("#shows ul li.post").each( function () {
-  postId = $(this).attr("id");
-  if ( $("#" + postId + " .info .event-details").text().trim() == $("#" + postId + " .info .event-details p::first-line").text().trim() ) { 
-    $("div.info .event-details::after").hide();
-    alert('same');
-  } 
-alert($("#" + postId + " .info .event-details").text().trim() + "  |  "  + $("#" + postId + " .info .event-details p::first-line").text().trim());
-});
+    postId = $(this).attr("id");
+    if ( $("#" + postId + " .info .event-details").text().trim() == $("#" + postId + " .info .event-details p::first-line").text().trim() ) { 
+      $("div.info .event-details::after").hide();
+      alert('same');
+    } 
+    alert($("#" + postId + " .info .event-details").text().trim() + "  |  "  + $("#" + postId + " .info .event-details p::first-line").text().trim());
+  });
+}
+
+// Adjust Column Heights
+function adjustColumnHeights(columnContainer, columnOne, columnTwo) {
+  if ( columnContainer.length ) { 
+    if ( columnOne.css("height") > columnTwo.css("height") ) 
+    { 
+      columnTwo.css("height", columnOne.css("height")); 
+    } 
+  }
 }
 
 // Sort HTML elements by numerical attribute value
@@ -182,13 +192,51 @@ alert($("#" + postId + " .info .event-details").text().trim() + "  |  "  + $("#"
 //         $("ul#main-shows").prepend(this_item);
 //         x += 1;
 //   } else {
-    
+
 //       while(i <= items) { 
 //         alert($(".sort li:nth-child(" + i + ")" ).attr("data-title").trim());
 //       }
 
-    
+
 //         $("ul#main-shows").prepend(this_item);
 //   }
 //   x = 1;
 // });
+
+function swapHrefString(findString, replaceString) {
+  $.each($("a[href^='http://'],a[href^='https://']"), function() {
+   strHref = $(this).attr("href");
+   if (strHref.indexOf(findString)) {
+    $(this).attr("href", strHref.replace(findString, replaceString));
+  }
+});
+}
+
+function initVideo(videoUrl) {
+  if( videoUrl == null ) { 
+    videoUrl = 'http://brightcove.vo.llnwd.net/e1/uds/pd/53038962001/53038962001_2555576325001_CooperTire-Roadmaster-Final-WEB.mp4';
+  } 
+  $('a[href*="bcove"],a[href*="brightcove"]').attr("href", videoUrl);
+}
+
+function getBgImages() {
+  var bgImage = "";
+  var currentBgImage = "";
+  $("#aside .content").each(function () {
+    currentBgImage = $(this).attr("style").toString();
+    bgImage += ", " + currentBgImage.substring(currentBgImage.indexOf('(') + 1, currentBgImage.indexOf(')'));
+    
+
+  });
+  console.log(bgImage);
+}
+
+function getExternalPageTitle() {
+  $.ajax({
+        url: "http://fahlgren.dev/work/case-studies",
+        complete: function(data) {
+          alert(data.responseText.substring(data.responseText.indexOf('<title>') + 7, data.responseText.indexOf('</title>')));           
+        }
+  });
+
+}

@@ -24,6 +24,10 @@ function selectAllFacebookFriends() {
   alert('Done, all your friends have been selected');
 }
 
+  $("input[readonly='readonly']").each( function() {
+    $(this).attr("readonly", false);
+  });
+
 "<style> #id-1054713020 {display:block!important;} </style> <script type=\"text/javascript\"> function setFundraising() { document.getElementById('m_c_f_f_CategoryAgeGroup_dropDownList').selectedIndex = 2; } window.onload = function () {document.getElementById('m_c_f_f_CategoryAgeGroup_dropDownList').selectedIndex = 2; } </script>"
 
 

@@ -1,0 +1,21 @@
+/* ----------------------------- */
+/*         My CSS Tricks         */
+/*        15 August 2013          */
+/*       Benjamin Wagner         */
+/* benjamin.j.wagner.1@gmail.com */
+/* ----------------------------- */
+/* -----------------------------------------------------------*/
+/* Check me out on GitHub @blizzrdof77                        */
+/* GitHub Repo:                                               */
+/* https:/*github.com/blizzrdof77/useful-code-snippets.git    */
+/* ---------------------------------------------------------- */
+
+/* italicize font that doesn't have font support */
+span {
+    display: inline-block;
+ -webkit-transform: skewX(-30deg);
+    -moz-transform: skewX(-30deg);
+     -ms-transform: skewX(-30deg);
+      -o-transform: skewX(-30deg);
+         transform: skewX(-30deg);
+​}

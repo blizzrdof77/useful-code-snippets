@@ -7,8 +7,12 @@ Thumbs.db
 ignore/
 
 # Folder config file
-Desktop.ini
+Desktop.in
 
+###########
+## Mac BS
+###########
+.DS_Store
 
 
 #################
