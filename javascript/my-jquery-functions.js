@@ -13,13 +13,15 @@
 // Gets alt tags for all img elements
 function getImgAltTags() {
   var alts = "";
-  $("img").each ( 
-                 function() { 
-                  alts += "  |  " + $(this).attr("alt"); 
-                }
-                );
+  $("img").each(
+    function() {
+      alts += "  |  " + $(this).attr("alt");
+    }
+  );
   console.log(alts);
-  alert(alts);
+  if (document.location.hash == "#test") {
+   alert("this");
+  }
 }
 
 // Restyle select menus
@@ -113,13 +115,13 @@ function hideElement(elementSelector) {
 }
 
 function onlyShowFirstLine() {
-  $("#shows ul li.post").each( function () {
+  $("#container ul li.post").each( function () {
     postId = $(this).attr("id");
-    if ( $("#" + postId + " .info .event-details").text().trim() == $("#" + postId + " .info .event-details p::first-line").text().trim() ) { 
-      $("div.info .event-details::after").hide();
+    if ( $("#" + postId + " .text").text().trim() == $("#" + postId + " .text p::first-line").text().trim() ) { 
+      $(".text text::after").hide();
       alert('same');
     } 
-    alert($("#" + postId + " .info .event-details").text().trim() + "  |  "  + $("#" + postId + " .info .event-details p::first-line").text().trim());
+    alert($("#" + postId + " .text").text().trim() + "  |  "  + $("#" + postId + " .text p::first-line").text().trim());
   });
 }
 
@@ -133,44 +135,19 @@ function adjustColumnHeights(columnContainer, columnOne, columnTwo) {
   }
 }
 
-// Sort HTML elements by numerical attribute value
-// function sortListNumerically (listItems) {
-//   sortElements = $("#shows ul li");
-//   i = 0;
-//   var sortValues = [];
-// sortElements.each(function(){
-//     // create a temp array for this row
-//     var row = [];
-//     // add the phone and rating as array elements
-//     row.push($(this).find('.clsPhone').text());
-//     row.push($(this).find('.clsRating').text());
-//     // add the temp array to the main array
-//     s1.push(row);
-//     i++;
-// });
-// if (parseInt($("#shows li:first-child .orderby").html(), 10) < parseInt($("#shows li:nth-child(2) .orderby").html(), 10)) { alert("hey");}
-// //parseInt($("#shows li:first-child .orderby").html(), 10
-
-
-
-
-// }
 // function sortList(ul){
 //     var new_ul = ul.cloneNode(false);
-
 //     // Add all lis to an array
 //     var lis = [];
 //     for(var i = ul.childNodes.length; i--;){
 //         if(ul.childNodes[i].nodeName === 'LI')
 //             lis.push(ul.childNodes[i]);
 //     }
-
 //     // Sort the lis in descending order
 //     lis.sort(function(a, b){
 //        return parseInt(b.childNodes[0].data , 10) - 
 //               parseInt(a.childNodes[0].data , 10);
 //     });
-
 //     // Add them into the ul in order
 //     for(var i = 0; i < lis.length; i++)
 //         new_ul.insertBefore(lis[i], new_ul.firstChild);
@@ -178,33 +155,12 @@ function adjustColumnHeights(columnContainer, columnOne, columnTwo) {
 // }
 // sortList(document.getElementsByClassName('sort')[0]);
 
-
-
-
-
-// x = 1;
-// i = 1;
-// items = $(".sort").children().length;
-// $(".event-title").each ( function() {
-//   //alert("MAIN = " + $(this).text().trim() + "  |  SORT = " + $(".sort li:nth-child(" + x + ")" ).attr("data-title").trim());
-//   this_item = $(this).parent().parent().parent().parent();
-//   if ($(this).text().trim() == $(".sort li:nth-child(" + x + ")" ).attr("data-title").trim() ) { 
-//         $("ul#main-shows").prepend(this_item);
-//         x += 1;
-//   } else {
-
-//       while(i <= items) { 
-//         alert($(".sort li:nth-child(" + i + ")" ).attr("data-title").trim());
-//       }
-
-
-//         $("ul#main-shows").prepend(this_item);
-//   }
-//   x = 1;
-// });
-
-function swapHrefString(findString, replaceString) {
-  $.each($("a[href^='http://'],a[href^='https://']"), function() {
+function swapHrefString(findString, replaceString, htmlElemTarget) {
+  if( htmlElemTarget == null ) { 
+    htmlElemTarget = "a";
+    
+  } 
+  $.each($(htmlElemTarget+"[href*='" + findString + "'], " + htmlElemTarget+"[src*='" + findString + "']"), function() {
    strHref = $(this).attr("href");
    if (strHref.indexOf(findString)) {
     $(this).attr("href", strHref.replace(findString, replaceString));
@@ -212,31 +168,80 @@ function swapHrefString(findString, replaceString) {
 });
 }
 
-function initVideo(videoUrl) {
-  if( videoUrl == null ) { 
-    videoUrl = 'http://brightcove.vo.llnwd.net/e1/uds/pd/53038962001/53038962001_2555576325001_CooperTire-Roadmaster-Final-WEB.mp4';
-  } 
-  $('a[href*="bcove"],a[href*="brightcove"]').attr("href", videoUrl);
-}
 
-function getBgImages() {
+function getBgImages(elementSelectors) {
   var bgImage = "";
   var currentBgImage = "";
-  $("#aside .content").each(function () {
+  $(elementSelectors).each(function () {
     currentBgImage = $(this).attr("style").toString();
     bgImage += ", " + currentBgImage.substring(currentBgImage.indexOf('(') + 1, currentBgImage.indexOf(')'));
-    
-
   });
   console.log(bgImage);
 }
 
 function getExternalPageTitle() {
   $.ajax({
-        url: "http://fahlgren.dev/work/case-studies",
+        url: "/some-url",
         complete: function(data) {
           alert(data.responseText.substring(data.responseText.indexOf('<title>') + 7, data.responseText.indexOf('</title>')));           
         }
   });
 
 }
+
+function loadExternalUrl(externalUrl)
+  $('body').load(externalUrl);
+  return false;
+}
+
+
+function swapElementString(elem, attrib, findString, replaceString) {
+  console.log($(elem + "[" + attrib + "*='" + findString + "']"));
+  $.each($(elem + "[" + attrib + "*='" + findString + "']"), function() {
+    strHref = $(this).attr(attrib);
+
+    $(this).attr(attrib, strHref.replace(findString, replaceString));
+
+  });
+}
+// Example Usage 
+// swapElementString("img", "src", "/App_Themes/Whatever", "/App_Themes/NewWhatever");
+function loadEternalData() {
+   
+ $("a").click(function(e) {
+   var $el = $(this);
+   $el.stop(true, true);
+   e.preventDefault();
+   if (history.pushState) {
+     window.history.pushState(null, $el.html(), $el.attr('href'));
+   }
+   // Update the page title
+   $.ajax({
+     url: $(this).attr("href"),
+     complete: function(data) {
+       pagedata = data.responseText;
+       $("body").children().fadeOut().parent().prepend(pagedata).next().remove();
+       pagetitle = pagedata.substring(pagedata.indexOf('<title>') + 7, pagedata.indexOf('</title>'));
+       document.title = pagetitle;
+     }
+   });
+   return false;
+ });
+}
+
+// Go back in browser history 
+function goBack() {
+  history.go(backLocation);
+}
+
+// Keypress Functions
+$(document).keyup(function(e) {
+  // Escape key
+  if (e.keyCode == 27) { 
+    // Do something
+  }
+  // Enter/Return Key
+  else if (e.keyCode == 27) {
+    // Do something else
+  }
+});
