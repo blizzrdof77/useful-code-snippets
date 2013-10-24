@@ -241,7 +241,7 @@ $(document).keyup(function(e) {
     // Do something
   }
   // Enter/Return Key
-  else if (e.keyCode == 27) {
+  else if (e.keyCode == 13) {
     // Do something else
   }
 });
