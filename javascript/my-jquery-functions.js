@@ -20,6 +20,31 @@ function getImgAltTags() {
   //alert(alts);
 }
 
+// Example Usage 
+// swapElementString("img", "src", "/App_Themes/Whatever", "/App_Themes/NewWhatever");
+function loadEternalData() {
+   
+ $("a").click(function(e) {
+   var $el = $(this);
+   $el.stop(true, true);
+   e.preventDefault();
+   if (history.pushState) {
+     window.history.pushState(null, $el.html(), $el.attr('href'));
+   }
+   // Update the page title
+   $.ajax({
+     url: $(this).attr("href"),
+     complete: function(data) {
+       pagedata = data.responseText;
+       $("body").children().fadeOut().parent().prepend(pagedata).next().remove();
+       pagetitle = pagedata.substring(pagedata.indexOf('<title>') + 7, pagedata.indexOf('</title>'));
+       document.title = pagetitle;
+     }
+   });
+   return false;
+ });
+}
+
 // Example of creating a mobile menu
 function makeMobileMenu() {
   if ($(".list").length) {
@@ -104,12 +129,10 @@ function getExternalPageTitle() {
 }
 
 // Example of .load() jQuery function
-$(".link").click( 
-  function() {    
-    $('body').load('http://url.com');
-    return false;
-  }
-);
+function loadExternalUrl(externalUrl)
+  $('body').load(externalUrl);
+  return false;
+}
 
 // Generic specific function for swapping href string
 function swapHrefString(findString, replaceString) {
@@ -162,6 +185,19 @@ newWindow = function () {
     '<html><head><title>' + strWindowTitle + '</title><link rel="stylesheet" type="text/css" media="all" href="/theme-assets/style.css"></head><body class="popup" style="padding:0;margin:0 auto;text-align:center;box-sizing:border-box;border:4px solid rgba(173, 20, 20, 0.89)">' + strTitle + $result + '</body></html>' );
 }
 
+// Keypress Functions
+$(document).keyup(function(e) {
+  // Escape key
+  if (e.keyCode == 27) { 
+    // Do something
+  }
+  // Enter/Return Key
+  else if (e.keyCode == 13) {
+    // Do something else
+  }
+});
+
+
 
 // ------------------
 // - WORDPRESS CRUD -
@@ -176,6 +212,7 @@ YouTubeRssFeed = function() {
     $(this).html( '<img src="//i1.ytimg.com/vi/' + vid + '/hqdefault.jpg" alt="" class="thumbnail">' ); 
   });
 }
+/* <== END TURDPRESS CRUD ==> */
 
 
 // ------------------
@@ -213,4 +250,5 @@ $(document).ready( function() {
   var a = "readonly";
   var b = "readonly";
   removeElementAttribute(a, b);
-});
+}); 
+/* <== END KENTICO CRUD ==> */
