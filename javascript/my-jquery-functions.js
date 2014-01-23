@@ -13,62 +13,22 @@
 // Gets alt tags for all img elements
 function getImgAltTags() {
   var alts = "";
-  $("img").each ( 
-                 function() { 
-                  alts += "  |  " + $(this).attr("alt"); 
-                }
-                );
+  $("img").each (function() {
+      alts += "  |  " + $(this).attr("alt"); 
+  });
   console.log(alts);
-  alert(alts);
+  //alert(alts);
 }
 
-// Restyle select menus
-function restyleSelectMenu(elementSelector, userMainStyle, userAltStyle) {
-  var str = "";
-  $(elementSelector + " option:selected").each(function () {
-    str += $(this).text() + " ";
-  });
-
-  if (str.indexOf("Select")) {
-    $(elementSelector).attr("style", userAltStyle);
-  } else {
-    $(elementSelector).attr("style", userMainStyle);
-  }  
-}
-
-// Initialize dynamic select menu styling
-function initDynamicSelectMenuStyling(elementSelector, myStyle) {
-  $(document).ready( function() {
-    restyleSelectMenu(elementSelector, myStyle);
-    $(elementSelector).change(function () {
-      restyleSelectMenu(elementSelector, myStyle);
-    });
-  });
-}
-
-// Remove Element Attribute with specified value
-function removeElementAttribute(attrName, attrValue) {
-  $("input["+attrName+"='"+attrValue+"']").each( function() {
-    $(this).attr("readonly", false);
-  });
-}
-
-$(document).ready( function() {
-  var a = "readonly";
-  var b = "readonly";
-  removeElementAttribute(a, b);
-});
-
-
-// Add attributes to different types of links to control behavior
-function adjustElementAttributes() {
+// Example of creating a mobile menu
+function makeMobileMenu() {
   if ($(".list").length) {
-   $(".product:first-child").addClass("first");
- }
- $("#nav-primary > ul").addClass("nav");
- $("#nav-primary > ul > li").each( function() {
-  $('<a class="mobile_expand" href="javascript:void(0);">+</a>').prependTo($(this));
-});
+    $(".product:first-child").addClass("first");
+  }
+  $("#nav-primary > ul").addClass("nav");
+  $("#nav-primary > ul > li").each( function() {
+    $('<a class="mobile-expand" href="javascript:void(0);">+</a>').prependTo($(this));
+  });
 } 
 
 // Slick scroll animation to top of document
@@ -78,13 +38,13 @@ function scrollToTop() {
   }, 425 );
 }
 
-// Animated scroll to page elements
+// Animated scroll to page elements example
 function scrollToElement() {
   $( "#sidebar ul li ul li" ).click( function () {
     $( "#sidebar ul li ul li.highlighted" ).removeClass( "highlighted" );
     $( this ).addClass( "highlighted" );
     ref = $( this ).children( "a" ).attr( "href" );
-    $( "#tire-overview .product" ).each( function () {
+    $( "#overview .product" ).each( function () {
       eachRef = "#" + $( this ).attr( "id" );
       if ( eachRef == ref ) {
         $( this ).addClass( "highlighted" );
@@ -100,26 +60,15 @@ function scrollToElement() {
   });
 }
 
-// Show hidden element on page
-function showElement(elementSelector) {
-  $(elementSelector).fadeIn('fast').addClass("open");
-  return false;
-}
-
-// Hide visible element on page
-function hideElement(elementSelector) {
-  $(elementSelector).hide().removeClass("open");
-  return false;
-}
-
+// Example function to show only first line of text
 function onlyShowFirstLine() {
-  $("#shows ul li.post").each( function () {
+  $(".post").each( function () {
     postId = $(this).attr("id");
     if ( $("#" + postId + " .info .event-details").text().trim() == $("#" + postId + " .info .event-details p::first-line").text().trim() ) { 
       $("div.info .event-details::after").hide();
-      alert('same');
+      console.log('hidden...');
     } 
-    alert($("#" + postId + " .info .event-details").text().trim() + "  |  "  + $("#" + postId + " .info .event-details p::first-line").text().trim());
+    console.log($("#" + postId + " .info .event-details").text().trim() + "  |  "  + $("#" + postId + " .info .event-details p::first-line").text().trim());
   });
 }
 
@@ -133,104 +82,18 @@ function adjustColumnHeights(columnContainer, columnOne, columnTwo) {
   }
 }
 
-// Sort HTML elements by numerical attribute value
-// function sortListNumerically (listItems) {
-//   sortElements = $("#shows ul li");
-//   i = 0;
-//   var sortValues = [];
-// sortElements.each(function(){
-//     // create a temp array for this row
-//     var row = [];
-//     // add the phone and rating as array elements
-//     row.push($(this).find('.clsPhone').text());
-//     row.push($(this).find('.clsRating').text());
-//     // add the temp array to the main array
-//     s1.push(row);
-//     i++;
-// });
-// if (parseInt($("#shows li:first-child .orderby").html(), 10) < parseInt($("#shows li:nth-child(2) .orderby").html(), 10)) { alert("hey");}
-// //parseInt($("#shows li:first-child .orderby").html(), 10
-
-
-
-
-// }
-// function sortList(ul){
-//     var new_ul = ul.cloneNode(false);
-
-//     // Add all lis to an array
-//     var lis = [];
-//     for(var i = ul.childNodes.length; i--;){
-//         if(ul.childNodes[i].nodeName === 'LI')
-//             lis.push(ul.childNodes[i]);
-//     }
-
-//     // Sort the lis in descending order
-//     lis.sort(function(a, b){
-//        return parseInt(b.childNodes[0].data , 10) - 
-//               parseInt(a.childNodes[0].data , 10);
-//     });
-
-//     // Add them into the ul in order
-//     for(var i = 0; i < lis.length; i++)
-//         new_ul.insertBefore(lis[i], new_ul.firstChild);
-//     ul.parentNode.replaceChild(new_ul, ul);
-// }
-// sortList(document.getElementsByClassName('sort')[0]);
-
-
-
-
-
-// x = 1;
-// i = 1;
-// items = $(".sort").children().length;
-// $(".event-title").each ( function() {
-//   //alert("MAIN = " + $(this).text().trim() + "  |  SORT = " + $(".sort li:nth-child(" + x + ")" ).attr("data-title").trim());
-//   this_item = $(this).parent().parent().parent().parent();
-//   if ($(this).text().trim() == $(".sort li:nth-child(" + x + ")" ).attr("data-title").trim() ) { 
-//         $("ul#main-shows").prepend(this_item);
-//         x += 1;
-//   } else {
-
-//       while(i <= items) { 
-//         alert($(".sort li:nth-child(" + i + ")" ).attr("data-title").trim());
-//       }
-
-
-//         $("ul#main-shows").prepend(this_item);
-//   }
-//   x = 1;
-// });
-
-function swapHrefString(findString, replaceString) {
-  $.each($("a[href^='http://'],a[href^='https://']"), function() {
-   strHref = $(this).attr("href");
-   if (strHref.indexOf(findString)) {
-    $(this).attr("href", strHref.replace(findString, replaceString));
-  }
-});
-}
-
-function initVideo(videoUrl) {
-  if( videoUrl == null ) { 
-    videoUrl = 'http://brightcove.vo.llnwd.net/e1/uds/pd/53038962001/53038962001_2555576325001_CooperTire-Roadmaster-Final-WEB.mp4';
-  } 
-  $('a[href*="bcove"],a[href*="brightcove"]').attr("href", videoUrl);
-}
-
+// Get CSS style background images of element group
 function getBgImages() {
   var bgImage = "";
   var currentBgImage = "";
-  $("#aside .content").each(function () {
+  $("#containerId .targetElemetsClassName").each(function () {
     currentBgImage = $(this).attr("style").toString();
     bgImage += ", " + currentBgImage.substring(currentBgImage.indexOf('(') + 1, currentBgImage.indexOf(')'));
-    
-
   });
   console.log(bgImage);
 }
 
+// Get exteral URL page title w/ ajax
 function getExternalPageTitle() {
   $.ajax({
         url: "http://fahlgren.dev/work/case-studies",
@@ -238,5 +101,116 @@ function getExternalPageTitle() {
           alert(data.responseText.substring(data.responseText.indexOf('<title>') + 7, data.responseText.indexOf('</title>')));           
         }
   });
-
 }
+
+// Example of .load() jQuery function
+$(".link").click( 
+  function() {    
+    $('body').load('http://url.com');
+    return false;
+  }
+);
+
+// Generic specific function for swapping href string
+function swapHrefString(findString, replaceString) {
+  $.each($("a[href^='http://'],a[href^='https://']"), function() {
+    strHref = $(this).attr("href");
+    if (strHref.indexOf(findString)) {
+      $(this).attr("href", strHref.replace(findString, replaceString));
+    }
+  });
+}
+
+// General function to swap elem attribute string
+function swapElementString(elem, attrib, findString, replaceString) {
+  console.log($( elem + "[" + attrib + "*='" + findString + "']"));
+  $.each( $( elem + "[" + attrib + "*='" + findString + "']"), function() {
+    strHref = $(this).attr(attrib);
+    
+    $(this).attr(attrib, strHref.replace(findString, replaceString));
+    
+  });
+}
+swapElementString("img", "src", "/example/using/path", "/example/replace/string");
+
+
+// Example of pushstate usage
+$("#locator a").click(function() {
+  if (history.pushState) {
+    window.history.pushState(document.location + "#locator");
+  }
+});
+
+// Simple go back -1 in browser history function
+function goBack() {
+  history.go(backLocation);
+}
+
+// Useful new window function
+newWindow = function () {
+  var s = screen,
+  s = s.width,
+  s = ( ( s / 2 ) * 3 ) + (s/10),
+  sh = ( screen.height / 3 ) * 2;
+  //sh;
+
+  var strTitle = '<h3> Contact Us </h2>',
+    strWindowTitle = "Chinese School | Contact",
+    myWin = window.open( "", "myWin", "titlebar=no,toolbar=no,location=no,menubar=no,scrollbars=no,left=" + s + "px,top=" + sh + "px,height=350px,width=450px" );
+
+  myWin.document.write( '<!DOCTYPE HTML>' +
+    '<html><head><title>' + strWindowTitle + '</title><link rel="stylesheet" type="text/css" media="all" href="/theme-assets/style.css"></head><body class="popup" style="padding:0;margin:0 auto;text-align:center;box-sizing:border-box;border:4px solid rgba(173, 20, 20, 0.89)">' + strTitle + $result + '</body></html>' );
+}
+
+
+// ------------------
+// - WORDPRESS CRUD -
+// ------------------
+// Useful for turdpress.com
+YouTubeRssFeed = function() {
+  $ = jQuery;
+  var youTubeWidget = $('#widgetId');
+  var videos = youTubeWidget.find('li a');
+  videos.each( function() { 
+    var vid = $(this).attr('href').split('&feature')[0].split('v=')[1];
+    $(this).html( '<img src="//i1.ytimg.com/vi/' + vid + '/hqdefault.jpg" alt="" class="thumbnail">' ); 
+  });
+}
+
+
+// ------------------
+// -  KENTICO CRUD  -
+// ------------------
+// Restyle select menus
+function restyleSelectMenu(elementSelector, userMainStyle, userAltStyle) {
+  var str = "";
+  $(elementSelector + " option:selected").each(function () {
+    str += $(this).text() + " ";
+  });
+
+  if (str.indexOf("Select")) {
+    $(elementSelector).attr("style", userAltStyle);
+  } else {
+    $(elementSelector).attr("style", userMainStyle);
+  }  
+}
+// Initialize dynamic select menu styling
+function initDynamicSelectMenuStyling(elementSelector, myStyle) {
+  $(document).ready( function() {
+    restyleSelectMenu(elementSelector, myStyle);
+    $(elementSelector).change(function () {
+      restyleSelectMenu(elementSelector, myStyle);
+    });
+  });
+}
+// Remove Element Attribute with specified value
+function removeElementAttribute(attrName, attrValue) {
+  $("input["+attrName+"='"+attrValue+"']").each( function() {
+    $(this).attr("readonly", false);
+  });
+}
+$(document).ready( function() {
+  var a = "readonly";
+  var b = "readonly";
+  removeElementAttribute(a, b);
+});
